@@ -1,6 +1,14 @@
 from sys import exit
 
 
+def openFile(nameFile):
+    try:
+        file = open(nameFile, "r")
+        return file
+    except:
+        error()
+
+
 def menu():
     print("Para utilização do programa, utilize as seguintes instruções:")
     print("\t\033[1m:d\033[0m - realiza a divisão em tags da string do arquivo informado")
@@ -26,10 +34,14 @@ def error():
 
 if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
+
+    file = openFile(input("Nome do arquivo a ser lido:"))
+    print("Arquivo aberto com exito!\n")
+
     command = menu()
 
-    i=1
-    while i!=0:
+    i = 1
+    while i != 0:
         match command:
             case ':d':
                 command = warning()
@@ -44,6 +56,8 @@ if __name__ == "__main__":
             case ':l':
                 command = warning()
             case ':q':
+                file.close()
+                print("Fechando arquivo!")
                 print("Saindo do programa!")
                 exit()
             case ':s':
