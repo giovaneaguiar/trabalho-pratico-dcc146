@@ -1,14 +1,6 @@
 from sys import exit
 
 
-def openFile(nameFile):
-    try:
-        file = open(nameFile, "r")
-        return file
-    except:
-        error()
-
-
 def menu():
     print("Para utilização do programa, utilize as seguintes instruções:")
     print("\t\033[1m:d\033[0m - realiza a divisão em tags da string do arquivo informado")
@@ -35,8 +27,12 @@ def error():
 if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
-    file = openFile(input("Nome do arquivo a ser lido:"))
-    print("Arquivo aberto com exito!\n")
+    nameFile = input("Nome do arquivo a ser lido:")
+    try:
+        file = open(nameFile, "r")
+        print("Arquivo aberto com exito!\n")
+    except:
+        print("Arquivo não encontrado!")
 
     command = menu()
 
