@@ -1,3 +1,9 @@
+# Augusto Castilho - 201876044
+# Caio Azevedo -
+# Giovane Machado -
+# Matheus Rubio -
+
+
 from sys import exit
 
 
@@ -27,12 +33,16 @@ def error():
 if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
-    nameFile = input("Nome do arquivo a ser lido:")
+    nameFile = input("Nome do arquivo a ser lido: ")
     try:
-        file = open(nameFile, "r")
+        file = open(nameFile, "r", encoding="utf-8").readlines()
         print("Arquivo aberto com exito!\n")
     except:
-        print("Arquivo não encontrado!")
+        print("Arquivo não encontrado!\n")
+
+    for line in file:
+        line = line.rstrip("\n")
+        print(line)
 
     command = menu()
 
