@@ -3,66 +3,52 @@
 # Giovane Machado -
 # Matheus Rubio - 201876036
 
-def warning():
-    print("\n[WARNING] Esta funcionalidade ainda não foi implementada!\n")
-    return
-
+from email.message import Message
+from src.MessageLogs import MessageLogs
 
 path = '../files/'
-
-
 class Commands:
 
     @staticmethod
-    def error():
-        print("\n[ERROR] Erro de sintaxe!\n")
-        return
-
-    @staticmethod
     def divideTagsFile():  #:d
-        warning()
+        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return
 
     @staticmethod
     def chargeFile(nameFile: str):  #:c
         try:
             file = open(path + nameFile, "r", encoding="utf-8").readlines()
-            print("[INFO]Arquivo aberto com exito!\n")
+            MessageLogs.info("Arquivo aberto com exito!\n")
         except IOError:
-            print("[INFO]Arquivo não encontrado!\n")
+            MessageLogs.info("Arquivo não encontrado!\n")
             return file
-
-        # print("Dados do arquivo")
-        # for line in file:
-        #     line = line.rstrip("\n")
-        #     print(line)
 
     @staticmethod
     def outputFilePath():  #:o
-        warning()
+        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return
 
     @staticmethod
     def divideTagsParam():  #:p
-        warning()
+        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return
 
     @staticmethod
     def listAutoInMemory():  #:a
-        warning()
+        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return
 
     @staticmethod
-    def ListValidTags():    #:l
-        warning()
+    def listValidTags():    #:l
+        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return
 
     @staticmethod
     def quit():     #:q
-        print("[INFO]Saindo do programa!")
+        MessageLogs.info("Saindo do programa!")
         exit()
 
     @staticmethod
     def saveTags():     #:s
-        warning()
+        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return
