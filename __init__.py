@@ -24,33 +24,27 @@ if __name__ == "__main__":
 
     command = menu()
     commands = Commands()
-    i = 1
-    while i != 0:
+
+    while True:
         match command:
             case ':d':
                 commands.twoPointsD()
-                command = menu()
             case ':c':
                 nameFile = input("Nome do arquivo a ser lido: ")
                 file = commands.twoPointsC(nameFile)
-                command = menu()
             case ':o':
                 commands.twoPointsO()
-                command = menu()
             case ':p':
                 commands.twoPointsP()
-                command = menu()
             case ':a':
                 commands.twoPointsA()
-                command = menu()
             case ':l':
                 commands.twoPointsL()
-                command = menu()
             case ':q':
                 commands.twoPointsQ()
             case ':s':
                 commands.twoPointsS()
-                command = menu()
             case default:
                 commands.error()
-                command = menu()
+
+        commands = menu()
