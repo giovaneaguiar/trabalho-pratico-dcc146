@@ -19,12 +19,12 @@ class Commands:
         return
 
     @staticmethod
-    def twoPointsD():
+    def divideTagsFile():  #:d
         warning()
         return
 
     @staticmethod
-    def twoPointsC(nameFile: str):
+    def chargeFile(nameFile: str):  #:c
         try:
             file = open(path + nameFile, "r", encoding="utf-8").readlines()
             print("[INFO]Arquivo aberto com exito!\n")
@@ -38,31 +38,31 @@ class Commands:
         #     print(line)
 
     @staticmethod
-    def twoPointsO():
+    def outputFilePath():  #:o
         warning()
         return
 
     @staticmethod
-    def twoPointsP():
+    def divideTagsParam():  #:p
         warning()
         return
 
     @staticmethod
-    def twoPointsA():
+    def listAutoInMemory():  #:a
         warning()
         return
 
     @staticmethod
-    def twoPointsL():
+    def ListValidTags():    #:l
         warning()
         return
 
     @staticmethod
-    def twoPointsQ():
+    def quit():     #:q
         print("[INFO]Saindo do programa!")
         exit()
 
     @staticmethod
-    def twoPointsS():
+    def saveTags():     #:s
         warning()
         return

@@ -3,7 +3,7 @@
 # Giovane Machado -
 # Matheus Rubio - 201876036
 
-from commands import Commands
+from src.commands import Commands
 
 
 def menu():
@@ -28,22 +28,22 @@ if __name__ == "__main__":
     while True:
         match command:
             case ':d':
-                commands.twoPointsD()
+                commands.divideTagsFile()
             case ':c':
                 nameFile = input("Nome do arquivo a ser lido: ")
-                file = commands.twoPointsC(nameFile)
+                file = commands.chargeFile(nameFile)
             case ':o':
-                commands.twoPointsO()
+                commands.outputFilePath()
             case ':p':
-                commands.twoPointsP()
+                commands.divideTagsParam()
             case ':a':
-                commands.twoPointsA()
+                commands.listAutoInMemory()
             case ':l':
-                commands.twoPointsL()
+                commands.ListValidTags()
             case ':q':
-                commands.twoPointsQ()
+                commands.quit()
             case ':s':
-                commands.twoPointsS()
+                commands.saveTags()
             case default:
                 commands.error()
 
