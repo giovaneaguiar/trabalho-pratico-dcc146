@@ -4,11 +4,11 @@
 # Matheus Rubio -
 
 
-from sys import exit
+from commands import Commands
 
 
 def menu():
-    print("Para utilização do programa, utilize as seguintes instruções:")
+    print("[INFO]Para utilização do programa, utilize as seguintes instruções:")
     print("\t\033[1m:d\033[0m - realiza a divisão em tags da string do arquivo informado")
     print("\t\033[1m:c\033[0m - carrega um arquivo com definições de tags")
     print("\t\033[1m:o\033[0m - especifica o caminho do arquivo de saída para a divisão em tags")
@@ -20,53 +20,38 @@ def menu():
     return input("Digite a operação desejada: ")
 
 
-def warning():
-    print("\n[WARNING] Esta funcionalidade ainda não foi implementada!\n")
-    return menu()
-
-
-def error():
-    print("\n[ERROR] Erro de sintaxe!\n")
-    return menu()
-
-
 if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
-    nameFile = input("Nome do arquivo a ser lido: ")
-    try:
-        file = open(nameFile, "r", encoding="utf-8").readlines()
-        print("Arquivo aberto com exito!\n")
-    except:
-        print("Arquivo não encontrado!\n")
-
-    for line in file:
-        line = line.rstrip("\n")
-        print(line)
-
     command = menu()
-
+    commands = Commands()
     i = 1
     while i != 0:
         match command:
             case ':d':
-                command = warning()
+                commands.twoPointsD()
+                command = menu()
             case ':c':
-                command = warning()
+                nameFile = input("Nome do arquivo a ser lido: ")
+                file = commands.twoPointsC(nameFile)
+                command = menu()
             case ':o':
-                command = warning()
+                commands.twoPointsO()
+                command = menu()
             case ':p':
-                command = warning()
+                commands.twoPointsP()
+                command = menu()
             case ':a':
-                command = warning()
+                commands.twoPointsA()
+                command = menu()
             case ':l':
-                command = warning()
+                commands.twoPointsL()
+                command = menu()
             case ':q':
-                file.close()
-                print("Fechando arquivo!")
-                print("Saindo do programa!")
-                exit()
+                commands.twoPointsQ()
             case ':s':
-                command = warning()
+                commands.twoPointsS()
+                command = menu()
             case default:
-                command = error()
+                commands.error()
+                command = menu()
