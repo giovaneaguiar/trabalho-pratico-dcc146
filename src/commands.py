@@ -7,6 +7,8 @@ from email.message import Message
 from src.MessageLogs import MessageLogs
 
 path = '../files/'
+
+
 class Commands:
 
     @staticmethod
@@ -19,14 +21,15 @@ class Commands:
         try:
             file = open(path + nameFile, "r", encoding="utf-8").readlines()
             MessageLogs.info("Arquivo aberto com exito!\n")
-        except IOError:
-            MessageLogs.info("Arquivo não encontrado!\n")
             return file
+        except IOError:
+            MessageLogs.error("Arquivo não encontrado!\n")
 
     @staticmethod
-    def outputFilePath():  #:o
-        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
-        return
+    def outputFilePath(nameFile: str):  #:o
+        file = open(path + nameFile, "w", encoding="UTF-8")
+        MessageLogs.info(path+nameFile)
+        return file
 
     @staticmethod
     def divideTagsParam():  #:p
@@ -39,16 +42,16 @@ class Commands:
         return
 
     @staticmethod
-    def listValidTags():    #:l
+    def listValidTags():  #:l
         MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return
 
     @staticmethod
-    def quit():     #:q
+    def quit():  #:q
         MessageLogs.info("Saindo do programa!")
         exit()
 
     @staticmethod
-    def saveTags():     #:s
+    def saveTags():  #:s
         MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return

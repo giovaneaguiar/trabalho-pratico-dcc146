@@ -4,15 +4,21 @@
 # Matheus Rubio - 201876036
 class MessageLogs:
     @staticmethod
-    def warning(message):
+    def warning(message: str):
         print("\n \U0001f7e1 [WARNING] " + message)
         return
-    def info(message):
+
+    @staticmethod
+    def info(message: str):
         print("\n \U0001f535 [INFO] " + message)
         return
-    def error(message):
+
+    @staticmethod
+    def error(message: str):
         print("\n \U0001f534 [ERROR] " + message)
         return
-    def success(message):
+
+    @staticmethod
+    def success(message: str):
         print("\n \u2705 [SUCCESS] " + message)
         return
