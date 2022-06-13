@@ -1,6 +1,6 @@
 # Augusto Castilho - 201876044
 # Caio Azevedo -
-# Giovane Machado -
+# Giovane Machado - 201876019
 # Matheus Rubio - 201876036
 class MessageLogs:
     @staticmethod
