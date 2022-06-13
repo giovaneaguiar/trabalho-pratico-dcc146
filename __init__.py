@@ -58,11 +58,10 @@ if __name__ == "__main__":
             case ':S':
                 contentInput = userInput.split()[1]
                 commands.saveTags()
-            case 'INT:':
-                contentInput = userInput.split()[1]
-                valid = tags.validateTag(contentInput)
-                if valid is False:
-                    MessageLogs.error("A Tag INT já foi definida")
             case default:
-                MessageLogs.error("Sintaxe incorreta")
-
+                if ': ' in userInput:
+                    newTag = userInput.split(': ', 1)
+                    if tags.validateTag(newTag):
+                        tags.addNewTag(newTag)
+                else:
+                    MessageLogs.error("Tag ou Comando inválido")
