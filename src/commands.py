@@ -3,10 +3,9 @@
 # Giovane Machado -
 # Matheus Rubio - 201876036
 
-from email.message import Message
 from src.MessageLogs import MessageLogs
 
-path = '../files/'
+filesPath = '../files/'
 
 
 class Commands:
@@ -19,7 +18,7 @@ class Commands:
     @staticmethod
     def chargeFile(nameFile: str):  #:c
         try:
-            file = open(path + nameFile, "r", encoding="utf-8").readlines()
+            file = open(filesPath + nameFile, "r", encoding="utf-8").readlines()
             MessageLogs.info("Arquivo aberto com exito!\n")
             return file
         except IOError:
@@ -27,8 +26,8 @@ class Commands:
 
     @staticmethod
     def outputFilePath(nameFile: str):  #:o
-        file = open(path + nameFile, "w", encoding="UTF-8")
-        MessageLogs.info(path+nameFile)
+        file = open(filesPath + nameFile, "w", encoding="UTF-8")
+        MessageLogs.info(filesPath + nameFile)
         return file
 
     @staticmethod

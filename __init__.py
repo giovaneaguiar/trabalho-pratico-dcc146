@@ -29,7 +29,6 @@ def menu():
 if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
-    commands = Commands()
     tags = Tags()
 
     while True:
@@ -39,25 +38,25 @@ if __name__ == "__main__":
         match optionSelected:
             case ':D':
                 contentInput = userInput.split()[1]  # recebe apenas a segunda palavra passada, que é o conteudo
-                commands.divideTagsFile()
+                Commands.divideTagsFile()
             case ':C':
                 contentInput = userInput.split()[1]
-                file = commands.chargeFile(contentInput)
+                file = Commands.chargeFile(contentInput)
             case ':O':
                 contentInput = userInput.split()[1]
-                commands.outputFilePath(contentInput)
+                Commands.outputFilePath(contentInput)
             case ':P':
                 contentInput = userInput.split()[1]
-                commands.divideTagsParam()
+                Commands.divideTagsParam()
             case ':A':
-                commands.listAutoInMemory()
+                Commands.listAutoInMemory()
             case ':L':
-                commands.listValidTags()
+                Commands.listValidTags()
             case ':Q':
-                commands.quit()
+                Commands.quit()
             case ':S':
                 contentInput = userInput.split()[1]
-                commands.saveTags()
+                Commands.saveTags()
             case default:
                 if ': ' in userInput:
                     newTag = userInput.split(': ', 1)
