@@ -3,10 +3,9 @@
 # Giovane Machado - 201876019
 # Matheus Rubio - 201876036
 
+from src.Commands import Commands
 from src.MessageLogs import MessageLogs
-from Commands import Commands
-from Tags import Tags
-
+from src.Tag import Tag
 
 def menu():
     MessageLogs.info("Para utilização do programa, utilize as seguintes instruções ou defina uma TAG:")
@@ -24,7 +23,7 @@ def menu():
 if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
-    tags = Tags()
+    tags = {} # Array com as tags criadas durante a execução da aplicação.
 
     while True:
         userInput = menu()
@@ -55,7 +54,15 @@ if __name__ == "__main__":
             case default:
                 if ': ' in userInput:
                     newTag = userInput.split(': ', 1)
-                    if tags.validateTag(newTag):
-                        tags.addNewTag(newTag)
+
+                    if Tag.validateTag(newTag):
+                        newTagName = newTag[0].upper()
+                        newTagValue = newTag[1]
+                        newTag = Tag(newTagName, newTagValue)
+                        if newTagName in tags:
+                            MessageLogs.error("Tag já existe!")
+                        else:
+                            tags[newTag.tagName] = newTag.tagValue
+                            MessageLogs.success("Tag válida!")
                 else:
                     MessageLogs.error("Tag ou Comando inválido")
