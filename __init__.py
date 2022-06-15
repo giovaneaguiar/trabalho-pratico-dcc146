@@ -4,8 +4,8 @@
 # Matheus Rubio - 201876036
 
 from src.MessageLogs import MessageLogs
-from src.commands import Commands
-from src.tags import Tags
+from Commands import Commands
+from Tags import Tags
 
 
 def menu():
