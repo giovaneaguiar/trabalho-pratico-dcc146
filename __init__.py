@@ -18,11 +18,6 @@ def menu():
     print("\t\033[1m:l\033[0m - Lista as definições de tag válidas")
     print("\t\033[1m:q\033[0m - sair do programa")
     print("\t\033[1m:s\033[0m - salvar as tags\n")
-    print("\t\033[1mINT\033[0m - Número inteiros")
-    print("\t\033[1mSPACE\033[0m - Sequência de espaços em branco")
-    print("\t\033[1mVAR\033[0m - Sequência de símbolo alfanuméricos com o primeiro símbolo sendo uma letra")
-    print("\t\033[1mEQUALS\033[0m - O símbolo “=”")
-    print("\t\033[1mCOMMENT\033[0m - Qualquer sequência contida entra os símbolos “/*” e “*/”\n")
     return input("Digite a operação desejada: ")
 
 
