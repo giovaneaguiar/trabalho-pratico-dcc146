@@ -20,3 +20,18 @@ Tendo seu ambiente configurado, basta ir na pasta raiz do projeto digitar o segu
   ou <br>
   <b>python3.10 __init__.py</b><br>
 </p>
+
+## Estruturas de dados
+- MessageLogs
+
+  Classe com todos os seus métodos estáticos, criada com o intuito de auxiliar no momento da impressão de mensagens [INFO], [WARNING], [ERROR] e [SUCCESS].
+- Commands
+
+  Classe também com todos os seus métodos estáticos, nela estão presentes os métodos responsáveis por cada comando existente no menu da aplicação, conforme orientado, comandos ainda não implementados estão com o aviso de que ainda não foram implementados.
+- Tag
+
+	Classe que contém as informações de uma tag a ser criada, somente com os campos “tagName” e “tagValue”, também possui um método estático utilizado para realizar a validação de uma tag informada pelo usuário.
+
+- __init__.py
+
+  Arquivo responsável pela execução de todo o código da aplicação, imprime um menu com os comandos disponíveis para serem utilizados, aguarda a resposta do usuário, verifica se é um comando ou a adição de uma tag válida, se for um comando válido, irá executar o comando especificado, se for uma tag válida, irá verificar se a tag já existe no array de tags e caso não tenha sido criada anteriormente durante a execução do código irá adicionar a tag especificada pelo usuário a lista de tags. O código após cada comando ou tag definida ainda continua em execução, enquanto não houver uma resposta do tipo “:q”, a execução dele não é interrompida.
