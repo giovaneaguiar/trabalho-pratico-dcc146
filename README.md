@@ -2,7 +2,6 @@
 
 #### Alunos: 
 - Augusto Castilho  - 201876044
-- Caio Azevedo      - 201876017
 - Giovane Machado   - 201876019
 - Matheus Rubio     - 201876036
 
