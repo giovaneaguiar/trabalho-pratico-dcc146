@@ -1,5 +1,4 @@
 # Augusto Castilho - 201876044
-# Caio Azevedo - 201876017
 # Giovane Machado - 201876019
 # Matheus Rubio - 201876036
 
@@ -23,7 +22,7 @@ def menu():
 if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
-    tags = {} # Array com as tags criadas durante a execução da aplicação.
+    tags = {}   # Array com as tags criadas durante a execução da aplicação.
 
     while True:
         userInput = menu()
@@ -61,8 +60,15 @@ if __name__ == "__main__":
                         newTag = Tag(newTagName, newTagValue)
                         if newTagName in tags:
                             MessageLogs.error("Tag já existe!")
+                            MessageLogs.warning("Deseja sobreescrever a Tag? (s/n)")
+                            if input() == 's':
+                                tags[newTag.tagName] = newTag.tagValue
+                                MessageLogs.success("Tag válida!")
                         else:
                             tags[newTag.tagName] = newTag.tagValue
                             MessageLogs.success("Tag válida!")
+                    else:
+                        MessageLogs.error("Formato da tag inválido!")
+
                 else:
                     MessageLogs.error("Tag ou Comando inválido")
