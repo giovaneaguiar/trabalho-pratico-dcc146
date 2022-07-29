@@ -40,8 +40,12 @@ class Commands:
         return
 
     @staticmethod
-    def listValidTags():  #:l
-        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
+    def listValidTags(tags):  #:l
+        if len(tags) >= 1:
+            for tag in tags:
+                print(tag)
+        else:
+            MessageLogs.info("Nenhuma Tag foi validada ainda")
         return
 
     @staticmethod

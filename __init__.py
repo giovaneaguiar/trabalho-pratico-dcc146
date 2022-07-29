@@ -32,7 +32,7 @@ if __name__ == "__main__":
             case ':A':
                 Commands.listAutoInMemory()
             case ':L':
-                Commands.listValidTags()
+                Commands.listValidTags(tags)
             case ':Q':
                 Commands.quit()
             case ':S':
