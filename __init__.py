@@ -6,15 +6,17 @@ from src.Commands import Commands
 from src.MessageLogs import MessageLogs
 from src.Tag import Tag
 
-
 if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
-    tags = {}   # Array com as tags criadas durante a execução da aplicação.
+    tags = {}  # Array com as tags criadas durante a execução da aplicação.
 
     while True:
         userInput = input()
-        optionSelected = userInput.split()[0].upper()  # recebe apenas a primeira palavra passada, que é o comando
+        try:
+            optionSelected = userInput.split()[0].upper()  # recebe apenas a primeira palavra passada, que é o comando
+        except:
+            optionSelected = ""
 
         match optionSelected:
             case ':D':
