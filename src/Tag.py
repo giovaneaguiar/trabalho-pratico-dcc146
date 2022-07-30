@@ -3,6 +3,7 @@
 # Matheus Rubio - 201876036
 
 stack = []
+charsEscape = ['n', '\\', '*', '.', '+', 'l']
 
 
 class Tag:
@@ -57,13 +58,12 @@ class Tag:
                 # ou a cadeia vazia (λ), serão usados símbolos de escape. Os símbolos de escape são especificados
                 # usando o símbolo \ seguido por um caractere.
                 case '\\':
-                    if tagValue[1] == 'n':  # Se vier um \n é quebra de linha, não sei como representar e nem pra que usar isso
-                        return True
-                    elif tagValue[1] == 'l':  # Se vier um \l é Lambda, não sei como representar e nem pra que usar isso
-                        return True
-                    else:
-                        stack.append(tagValue[1])
+                    if tagValue[1] in charsEscape:
+                        stack.append(tagValue[0]+tagValue[1])
                         tagValue = tagValue[2:len(tagValue)]
+                    else:
+                        stack.clear()
+                        return False
                 case default:
                     stack.append(tagValue[0])
                     tagValue = tagValue[1:len(tagValue)]
