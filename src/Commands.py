@@ -43,7 +43,7 @@ class Commands:
     def listValidTags(tags):  #:l
         if len(tags) >= 1:
             for tag in tags:
-                print(tag)
+                print(tag + ": " + tags[tag])
         else:
             MessageLogs.info("Nenhuma Tag foi validada ainda")
         return
