@@ -2,9 +2,10 @@
 # Giovane Machado - 201876019
 # Matheus Rubio - 201876036
 
+import os.path
 from src.MessageLogs import MessageLogs
 
-filesPath = '../files/'
+previousPath = os.path.abspath(os.path.dirname(__file__))
 
 
 class Commands:
@@ -23,8 +24,9 @@ class Commands:
 
     @staticmethod
     def chargeFile(nameFile: str):  #:c
+        filesPath = os.path.join(previousPath, '..', 'files', nameFile)
         try:
-            file = open(filesPath + nameFile, "r", encoding="utf-8").readlines()
+            file = open(filesPath, 'r', encoding='utf-8').readlines()
             MessageLogs.info("Arquivo aberto com exito!\n")
             return file
         except IOError:
@@ -32,8 +34,9 @@ class Commands:
 
     @staticmethod
     def outputFilePath(nameFile: str):  #:o
-        file = open(filesPath + nameFile, "w", encoding="UTF-8")
-        MessageLogs.info(filesPath + nameFile)
+        filesPath = os.path.join(previousPath, '..', 'files', nameFile)
+        file = open(filesPath, "w", encoding="UTF-8")
+        MessageLogs.info(filesPath)
         return file
 
     def divideTagsParam(self, string: str, automatons):  #:p
