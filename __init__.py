@@ -21,7 +21,7 @@ if __name__ == "__main__":
         match optionSelected:
             case ':D':
                 contentInput = userInput.split()[1]  # recebe apenas a segunda palavra passada, que é o conteudo
-                Commands.divideTagsFile()
+                Commands.divideTagsFile(contentInput, automatons)
             case ':C':
                 contentInput = userInput.split()[1]
                 file = Commands.chargeFile(contentInput)
@@ -30,7 +30,7 @@ if __name__ == "__main__":
                 Commands.outputFilePath(contentInput)
             case ':P':
                 contentInput = userInput.split()[1]
-                Commands.divideTagsParam()
+                Commands.divideTagsParam(contentInput, automatons)
             case ':A':
                 Commands.listAutoInMemory()
             case ':L':
