@@ -10,6 +10,7 @@ if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
     tags = {}  # Array com as tags criadas durante a execução da aplicação.
+    automatons = {}  # Array com autômatos
 
     while True:
         userInput = input()
