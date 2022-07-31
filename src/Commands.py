@@ -9,9 +9,16 @@ filesPath = '../files/'
 
 class Commands:
 
-    @staticmethod
-    def divideTagsFile():  #:d
-        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
+    __tagsInput = []  # Array com todas as tags da entrada especificada
+
+    def divideTagsFile(self, string: str, automatons):  #:d
+        file = self.chargeFile(string)
+        for line in file:
+            self.__tagsInput.clear()
+            if self.__divideTags(line, automatons):
+                print(" ".join(self.__tagsInput))
+            else:
+                MessageLogs.error("A entrada não pode ser completamente reconhecida!")
         return
 
     @staticmethod
@@ -29,9 +36,12 @@ class Commands:
         MessageLogs.info(filesPath + nameFile)
         return file
 
-    @staticmethod
-    def divideTagsParam():  #:p
-        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
+    def divideTagsParam(self, string: str, automatons):  #:p
+        self.__tagsInput.clear()
+        if self.__divideTags(string, automatons):
+            print(" ".join(self.__tagsInput))
+        else:
+            MessageLogs.error("A entrada não pode ser completamente reconhecida!")
         return
 
     @staticmethod
@@ -57,3 +67,32 @@ class Commands:
     def saveTags():  #:s
         MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
         return
+
+    # ------------------- Fim dos comandos -------------------
+    #
+    # ------------------ Métodos auxiliares ------------------
+
+    def __divideTags(self, string: str, automatons):
+        firstChar = 0
+        lastChar = len(string)
+        foundAutomaton = False
+        while lastChar >= firstChar:
+            # Testa se a entrada é reconhecida por algum automato
+            # Se não for, então retira o último elemento e testa de novo
+            for automaton in automatons:
+                if True:  # automaton.processar_texto(texto[charInicial:charFinal]):
+                    self.__tagsInput.append(automaton.get_nome_tag())
+                    firstChar = lastChar
+                    lastChar = len(string)
+                    foundAutomaton = True
+                    break  # Para de procurar os automatos
+
+            # Se nenhum automato reconhecer o texto, o caractere final eh retirado
+            if not foundAutomaton:
+                lastChar = lastChar - 1
+                if lastChar == firstChar:
+                    return False
+            else:
+                if lastChar == firstChar:
+                    break
+        return True
