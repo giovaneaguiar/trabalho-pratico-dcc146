@@ -83,8 +83,8 @@ class Commands:
             # Testa se a entrada é reconhecida por algum automato
             # Se não for, então retira o último elemento e testa de novo
             for automaton in automatons:
-                if True:  # automaton.processar_texto(texto[charInicial:charFinal]):
-                    self.__tagsInput.append(automaton.get_nome_tag())
+                if automaton.analyzeString(string[firstChar:lastChar]):
+                    self.__tagsInput.append(automaton.getTagName())
                     firstChar = lastChar
                     lastChar = len(string)
                     foundAutomaton = True
