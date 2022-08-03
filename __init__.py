@@ -26,6 +26,24 @@ if __name__ == "__main__":
             case ':C':
                 contentInput = userInput.split()[1]
                 file = Commands.chargeFile(contentInput)
+                for line in file:
+                    newTag = line.rstrip('\n')
+                    print(line)
+                    if Tag.validateTag(newTag):
+                        newTagName = newTag[0].upper()
+                        newTagValue = newTag[1]
+                        newTag = Tag(newTagName, newTagValue)
+                        if newTagName in tags:
+                            MessageLogs.error("Tag já existe!")
+                            MessageLogs.warning("Deseja sobreescrever a Tag? (s/n)")
+                            if input() == 's':
+                                tags[newTag.tagName] = newTag.tagValue
+                                MessageLogs.success("Tag válida!")
+                        else:
+                            tags[newTag.tagName] = newTag.tagValue
+                            MessageLogs.success("Tag válida!")
+                    else:
+                        MessageLogs.error("Formato da tag inválido!")
             case ':O':
                 contentInput = userInput.split()[1]
                 Commands.outputFilePath(contentInput)
