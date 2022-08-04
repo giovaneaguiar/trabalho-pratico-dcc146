@@ -28,20 +28,22 @@ if __name__ == "__main__":
     tags = {}  # Array com as tags criadas durante a execução da aplicação.
     automatons = {}  # Array com autômatos
 
+    twoParamCommands = [':D', ':C', ':O', ':P', ':S']
+
     while True:
         userInput = input()
         try:
             optionSelected = userInput.split()[0].upper()  # recebe apenas a primeira palavra passada, que é o comando
         except:
             optionSelected = ""
+        if optionSelected in twoParamCommands:
+            try:
+                contentInput = userInput.split()[1]  # recebe apenas a segunda palavra passada, que é o conteudo
+            except:
+                MessageLogs.error("Este comando requer dois parâmetros.")
 
         match optionSelected:
             case ':D':
-                try:
-                    contentInput = userInput.split()[1]  # recebe apenas a segunda palavra passada, que é o conteudo
-                except:
-                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :d file.txt")
-
                 # Se o arquivo não for encontrado, continua a aplicação
                 try:
                     Commands.divideTagsFile(contentInput, automatons)
@@ -49,10 +51,6 @@ if __name__ == "__main__":
                     pass
 
             case ':C':
-                try:
-                    contentInput = userInput.split()[1]
-                except:
-                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :c file.txt")
                 try:
                     file = Commands.chargeFile(contentInput)
                     for line in file:
@@ -67,21 +65,13 @@ if __name__ == "__main__":
 
             case ':O':
                 try:
-                    contentInput = userInput.split()[1]
-                except:
-                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :o file.txt")
-                try:
                     Commands.outputFilePath(contentInput)
                 except:
                     pass
 
             case ':P':
-                try:
-                    contentInput = userInput.split()[1]
-                except:
-                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :p x=1037")
                 Commands.divideTagsParam(contentInput, automatons)
-                
+
             case ':A':
                 Commands.listAutoInMemory()
 
@@ -92,10 +82,6 @@ if __name__ == "__main__":
                 Commands.quit()
 
             case ':S':
-                try:
-                    contentInput = userInput.split()[1]
-                except:
-                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :s file.txt")
                 try:
                     Commands.saveTags()
                 except:
