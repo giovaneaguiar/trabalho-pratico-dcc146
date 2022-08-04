@@ -43,6 +43,7 @@ if __name__ == "__main__":
                 contentInput = userInput.split()[1]
                 file = Commands.chargeFile(contentInput)
                 for line in file:
+                    line = line.rstrip('\n')
                     newTag = line.split(': ', 1)
                     if Tag.validateTag(newTag):
                         addTag(newTag)
