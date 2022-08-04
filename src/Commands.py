@@ -16,7 +16,7 @@ class Commands:
         file = self.chargeFile(string)
         for line in file:
             self.__tagsInput.clear()
-            if self.__divideTags(line, automatons):
+            if self.__divideTags(self, line, automatons):
                 print(" ".join(self.__tagsInput))
             else:
                 MessageLogs.error("A entrada não pode ser completamente reconhecida!")
@@ -28,6 +28,10 @@ class Commands:
         try:
             file = open(filesPath, 'r', encoding='utf-8').readlines()
             MessageLogs.info("Arquivo aberto com exito!\n")
+            i = 0
+            while i < file.__len__():
+                file[i] = file[i].rstrip('\n')
+                i = i + 1
             return file
         except IOError:
             MessageLogs.error("Arquivo não encontrado!\n")
@@ -41,7 +45,7 @@ class Commands:
 
     def divideTagsParam(self, string: str, automatons):  #:p
         self.__tagsInput.clear()
-        if self.__divideTags(string, automatons):
+        if self.__divideTags(self, string, automatons):
             print(" ".join(self.__tagsInput))
         else:
             MessageLogs.error("A entrada não pode ser completamente reconhecida!")

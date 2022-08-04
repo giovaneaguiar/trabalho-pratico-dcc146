@@ -46,7 +46,7 @@ if __name__ == "__main__":
             case ':D':
                 # Se o arquivo não for encontrado, continua a aplicação
                 try:
-                    Commands.divideTagsFile(contentInput, automatons)
+                    Commands.divideTagsFile(Commands, contentInput, automatons)
                 except:
                     pass
 
@@ -54,7 +54,6 @@ if __name__ == "__main__":
                 try:
                     file = Commands.chargeFile(contentInput)
                     for line in file:
-                        line = line.rstrip('\n')
                         newTag = line.split(': ', 1)
                         if Tag.validateTag(newTag):
                             addTag(newTag)
@@ -70,7 +69,7 @@ if __name__ == "__main__":
                     pass
 
             case ':P':
-                Commands.divideTagsParam(contentInput, automatons)
+                Commands.divideTagsParam(Commands, contentInput, automatons)
 
             case ':A':
                 Commands.listAutoInMemory()
