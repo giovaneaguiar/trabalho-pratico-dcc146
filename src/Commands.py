@@ -52,8 +52,14 @@ class Commands:
         return
 
     @staticmethod
-    def listAutoInMemory():  #:a
-        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
+    def listAutoInMemory(automatons):  #:a
+        i = 0
+        if len(automatons) >= 1:
+            for auto in automatons:
+                auto.formalDefinition(i)
+                i = i + 1
+        else:
+            MessageLogs.info("Nenhuma Tag foi validada ainda")
         return
 
     @staticmethod

@@ -5,6 +5,7 @@
 from src.Commands import Commands
 from src.MessageLogs import MessageLogs
 from src.Tag import Tag
+from src.Converter import Converter
 
 
 def addTag(newTag):
@@ -26,7 +27,7 @@ if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
     tags = {}  # Array com as tags criadas durante a execução da aplicação.
-    automatons = {}  # Array com autômatos
+    automatons = []  # Array com autômatos
 
     twoParamCommands = [':D', ':C', ':O', ':P', ':S']
 
@@ -57,6 +58,8 @@ if __name__ == "__main__":
                         newTag = line.split(': ', 1)
                         if Tag.validateTag(newTag):
                             addTag(newTag)
+                            Converter.addAutomaton(Converter, newTag[0], newTag[1])
+                            automatons.append(Converter.getAutomaton(Converter, automatons.__len__()))
                         else:
                             MessageLogs.error("Formato da tag inválido!")
                 except:
@@ -72,7 +75,7 @@ if __name__ == "__main__":
                 Commands.divideTagsParam(Commands, contentInput, automatons)
 
             case ':A':
-                Commands.listAutoInMemory()
+                Commands.listAutoInMemory(automatons)
 
             case ':L':
                 Commands.listValidTags(tags)
