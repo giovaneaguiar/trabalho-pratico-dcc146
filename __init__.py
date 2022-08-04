@@ -37,33 +37,70 @@ if __name__ == "__main__":
 
         match optionSelected:
             case ':D':
-                contentInput = userInput.split()[1]  # recebe apenas a segunda palavra passada, que é o conteudo
-                Commands.divideTagsFile(contentInput, automatons)
+                try:
+                    contentInput = userInput.split()[1]  # recebe apenas a segunda palavra passada, que é o conteudo
+                except:
+                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :d file.txt")
+
+                # Se o arquivo não for encontrado, continua a aplicação
+                try:
+                    Commands.divideTagsFile(contentInput, automatons)
+                except:
+                    pass
+
             case ':C':
-                contentInput = userInput.split()[1]
-                file = Commands.chargeFile(contentInput)
-                for line in file:
-                    line = line.rstrip('\n')
-                    newTag = line.split(': ', 1)
-                    if Tag.validateTag(newTag):
-                        addTag(newTag)
-                    else:
-                        MessageLogs.error("Formato da tag inválido!")
+                try:
+                    contentInput = userInput.split()[1]
+                except:
+                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :c file.txt")
+                try:
+                    file = Commands.chargeFile(contentInput)
+                    for line in file:
+                        line = line.rstrip('\n')
+                        newTag = line.split(': ', 1)
+                        if Tag.validateTag(newTag):
+                            addTag(newTag)
+                        else:
+                            MessageLogs.error("Formato da tag inválido!")
+                except:
+                    pass
+
             case ':O':
-                contentInput = userInput.split()[1]
-                Commands.outputFilePath(contentInput)
+                try:
+                    contentInput = userInput.split()[1]
+                except:
+                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :o file.txt")
+                try:
+                    Commands.outputFilePath(contentInput)
+                except:
+                    pass
+
             case ':P':
-                contentInput = userInput.split()[1]
+                try:
+                    contentInput = userInput.split()[1]
+                except:
+                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :p x=1037")
                 Commands.divideTagsParam(contentInput, automatons)
+                
             case ':A':
                 Commands.listAutoInMemory()
+
             case ':L':
                 Commands.listValidTags(tags)
+
             case ':Q':
                 Commands.quit()
+
             case ':S':
-                contentInput = userInput.split()[1]
-                Commands.saveTags()
+                try:
+                    contentInput = userInput.split()[1]
+                except:
+                    MessageLogs.error("Este comando requer dois parâmetros. Ex.: :s file.txt")
+                try:
+                    Commands.saveTags()
+                except:
+                    pass
+
             case default:
                 if ': ' in userInput:
                     newTag = userInput.split(': ', 1)
