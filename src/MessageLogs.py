@@ -4,20 +4,20 @@
 class MessageLogs:
     @staticmethod
     def warning(message: str):
-        print("\n \U0001f7e1 [WARNING] " + message)
+        print("\U0001f7e1 [WARNING] " + message)
         return
 
     @staticmethod
     def info(message: str):
-        print("\n \U0001f535 [INFO] " + message)
+        print("\U0001f535 [INFO] " + message)
         return
 
     @staticmethod
     def error(message: str):
-        print("\n \U0001f534 [ERROR] " + message)
+        print("\U0001f534 [ERROR] " + message)
         return
 
     @staticmethod
     def success(message: str):
-        print("\n \u2705 [SUCCESS] " + message)
+        print("\u2705 [SUCCESS] " + message)
         return

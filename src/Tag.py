@@ -68,7 +68,7 @@ class Tag:
                     stack.append(tagValue[0])
                     tagValue = tagValue[1:len(tagValue)]
 
-        print("PILHA FINAL: " + stack[0])
+        print("\nExpressão Regular: " + stack[0])
 
         if len(stack) != 1:
             stack.clear()
