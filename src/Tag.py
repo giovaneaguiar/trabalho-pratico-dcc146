@@ -51,8 +51,6 @@ class Tag:
                     else:
                         stack.clear()
                         return False
-                case ' ':
-                    return True
 
                 # A fim de definir linguagens (ou tags) com caracteres especiais, que usam os meta-símbolos da linguagem
                 # ou a cadeia vazia (λ), serão usados símbolos de escape. Os símbolos de escape são especificados
@@ -68,11 +66,11 @@ class Tag:
                     stack.append(tagValue[0])
                     tagValue = tagValue[1:len(tagValue)]
 
-        print("\nExpressão Regular: " + stack[0])
-
         if len(stack) != 1:
             stack.clear()
             return False
+
+        print("\nExpressão Regular: " + stack[0])
 
         stack.clear()
         return True

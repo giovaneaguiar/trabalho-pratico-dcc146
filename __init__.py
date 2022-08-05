@@ -39,7 +39,7 @@ if __name__ == "__main__":
             optionSelected = ""
         if optionSelected in twoParamCommands:
             try:
-                contentInput = userInput.split()[1]  # recebe apenas a segunda palavra passada, que é o conteudo
+                contentInput = userInput[3:]  # recebe apenas a segunda palavra passada, que é o conteudo
             except:
                 MessageLogs.error("Este comando requer dois parâmetros.")
 
