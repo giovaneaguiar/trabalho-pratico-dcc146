@@ -9,7 +9,6 @@ previousPath = os.path.abspath(os.path.dirname(__file__))
 
 
 class Commands:
-
     __tagsInput = []  # Array com todas as tags da entrada especificada
 
     def divideTagsFile(self, string: str, automatons):  #:d
@@ -90,16 +89,19 @@ class Commands:
         firstChar = 0
         lastChar = len(string)
         foundAutomaton = False
+        recognized = ""
         while lastChar >= firstChar:
             # Testa se a entrada é reconhecida por algum automato
-            # Se não for, então retira o último elemento e testa de novo
             for automaton in automatons:
                 if automaton.analyzeString(string[firstChar:lastChar]):
-                    self.__tagsInput.append(automaton.getTagName())
-                    firstChar = lastChar
-                    lastChar = len(string)
-                    foundAutomaton = True
-                    break  # Para de procurar os automatos
+                    if not foundAutomaton:
+                        recognized = automaton.getTagName()
+                        self.__tagsInput.append(recognized)
+                        # firstChar = lastChar
+                        # lastChar = len(string)
+                        foundAutomaton = True
+                    else:
+                        MessageLogs.warning(f"Sobreposição na definição das Tags: {recognized} e { automaton.getTagName() }")
 
             # Se nenhum automato reconhecer o texto, o caractere final eh retirado
             if not foundAutomaton:
@@ -109,4 +111,8 @@ class Commands:
             else:
                 if lastChar == firstChar:
                     break
+                else:
+                    foundAutomaton = False
+                    firstChar = lastChar
+                    lastChar = len(string)
         return True
