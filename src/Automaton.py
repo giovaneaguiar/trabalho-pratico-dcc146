@@ -74,16 +74,13 @@ class Automaton(object):
     def reset(self):
         self.__currentState = self.__initialStates
 
-    '''
-    Para cada estado inicial verifica se eh possivel chegar em um estado final
-    '''
-
+    # Para cada estado inicial verifica se eh possivel chegar em um estado final
     def analyzeString(self, string: str) -> bool:
         for state in self.getInitialStates():
             nextState = state
             i = 0
             while nextState and i < len(string):
-                nextState = nextState.verificaTransicoes(string[i])  # ___________________________________________________________________________________________________________________________
+                nextState = nextState.checkTransitions(string[i])
                 i = i + 1
                 # Caso o proximo No seja um no final e todos os simbolos foram processados, o automato reconhece o texto
                 if nextState in self.getFinalStates() and i == len(string):
@@ -92,7 +89,6 @@ class Automaton(object):
         return False
 
     # Retorna a definição formal de um automato
-
     def formalDefinition(self, name: int):
 
         # Estados inicais
@@ -120,5 +116,18 @@ class Automaton(object):
         finalStateDefinition = finalStateDefinition[:-1]
 
         definition = f'M{name} = ( { {allStates} }, { {alphabet} }, δ{name} , {initialStatesDefinition}, { {finalStateDefinition} }) '
+
+        return definition
+
+    # Retorna a função de transição do autômato
+    def transitionFunc(self, name: int):
+        definition = f"δ{name}:\n"
+        for state in self.getStates():
+            for transition in state.getTransitions():
+                definition = definition + state.getName() + ': ' + \
+                             transition.getSymbol() + ' -> ' + \
+                             transition.getDestinyNode().getName() + '\n'
+            if len(state.getTransitions()) == 0:
+                definition = definition + state.getName() + ": λ\n"
 
         return definition

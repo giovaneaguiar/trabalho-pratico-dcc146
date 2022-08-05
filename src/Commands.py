@@ -56,10 +56,11 @@ class Commands:
         i = 0
         if len(automatons) >= 1:
             for auto in automatons:
-                auto.formalDefinition(i)
+                print(auto.formalDefinition(i))
+                print(auto.transitionFunc(i))
                 i = i + 1
         else:
-            MessageLogs.info("Nenhuma Tag foi validada ainda")
+            MessageLogs.info("Ainda não há autômatos em memória!")
         return
 
     @staticmethod

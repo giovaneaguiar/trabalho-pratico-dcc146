@@ -27,7 +27,7 @@ if __name__ == "__main__":
     print("\n\033[1m------Aspectos Teóricos da Computação(DCC146) - Trabalho Prático------\033[0m\n")
 
     tags = {}  # Array com as tags criadas durante a execução da aplicação.
-    automatons = []  # Array com autômatos
+    automatons = Converter()
 
     twoParamCommands = [':D', ':C', ':O', ':P', ':S']
 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
             case ':D':
                 # Se o arquivo não for encontrado, continua a aplicação
                 try:
-                    Commands.divideTagsFile(Commands, contentInput, automatons)
+                    Commands.divideTagsFile(Commands, contentInput, automatons.getAutomatons())
                 except:
                     pass
 
@@ -58,8 +58,7 @@ if __name__ == "__main__":
                         newTag = line.split(': ', 1)
                         if Tag.validateTag(newTag):
                             addTag(newTag)
-                            Converter.addAutomaton(Converter, newTag[0], newTag[1])
-                            automatons.append(Converter.getAutomaton(Converter, automatons.__len__()))
+                            automatons.addAutomaton(newTag[0], newTag[1])
                         else:
                             MessageLogs.error("Formato da tag inválido!")
                 except:
@@ -72,10 +71,10 @@ if __name__ == "__main__":
                     pass
 
             case ':P':
-                Commands.divideTagsParam(Commands, contentInput, automatons)
+                Commands.divideTagsParam(Commands, contentInput, automatons.getAutomatons())
 
             case ':A':
-                Commands.listAutoInMemory(automatons)
+                Commands.listAutoInMemory(automatons.getAutomatons())
 
             case ':L':
                 Commands.listValidTags(tags)

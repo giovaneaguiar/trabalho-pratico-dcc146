@@ -54,10 +54,10 @@ class Converter(object):
                             name = name + 1
                             auxFinalState = Node('q' + str(name))
                             name = name + 1
-                            auxInitialState.addTransition('δ', auxStack1.getInitialStates()[0])
-                            auxInitialState.addTransition('δ', auxStack2.getInitialStates()[0])
-                            auxStack1.getFinalStates()[0].addTransition('δ', auxFinalState)
-                            auxStack2.getFinalStates()[0].addTransition('δ', auxFinalState)
+                            auxInitialState.addTransition('λ', auxStack1.getInitialStates()[0])
+                            auxInitialState.addTransition('λ', auxStack2.getInitialStates()[0])
+                            auxStack1.getFinalStates()[0].addTransition('λ', auxFinalState)
+                            auxStack2.getFinalStates()[0].addTransition('λ', auxFinalState)
                             automaton.addInitialState(auxInitialState)
                             automaton.addFinalState(auxFinalState)
                             automaton.addState(auxInitialState)
@@ -72,7 +72,7 @@ class Converter(object):
                         else:
                             auxStack1 = stack.pop()
                             auxStack2 = stack.pop()
-                            auxStack2.getFinalStates()[0].addTransition('δ', auxStack1.getInitialStates()[0])
+                            auxStack2.getFinalStates()[0].addTransition('λ', auxStack1.getInitialStates()[0])
                             auxStack2.removeFinalState(auxStack2.getFinalStates()[0])
                             auxStack2.addFinalState(auxStack1.getFinalStates()[0])
                             for state in auxStack1.getStates():
@@ -85,7 +85,7 @@ class Converter(object):
                         return False
                     else:
                         auxStack1 = stack.pop()
-                        auxStack1.getFinalStates()[0].addTransition('δ', auxStack1.getInitialStates()[0])
+                        auxStack1.getFinalStates()[0].addTransition('λ', auxStack1.getInitialStates()[0])
                         auxStack1.removeFinalState(auxStack1.getFinalStates()[0])
                         auxStack1.addFinalState(auxStack1.getInitialStates()[0])
                         stack.append(auxStack1)
@@ -116,7 +116,7 @@ class Converter(object):
             afn = self.removeLambda(stack[0])
             stack.clear()
             afd = self.generateAFD(afn)
-            self.printAutomaton(afd)
+            # self.printAutomaton(afd)
             afd.setTagName(tagName)
             self.__automatons.append(afd)
 
@@ -129,30 +129,20 @@ class Converter(object):
     def getAutomatons(self):
         return self.__automatons
 
-    # Função para imprimir o autômato
-    @staticmethod
-    def printAutomaton(automaton: Automaton):
-        print("\nAFD gerado: ")
-        for state in automaton.getStates():
-            for transition in state.getTransitions():
-                print(state.getName() + ': ' + transition.getSymbol() +
-                      ' -> ' + transition.getDestinyNode().getName())
-            if len(state.getTransitions()) == 0:
-                print(state.getName())
-
     # Função auxiliar para descobrir quais nós é possível alcançar com transições lambdas a partir de um nó
     def __reachesWithLambda(self, state, reachLambda):
         if state not in reachLambda:
             reachLambda.append(state)
         for transition in state.getTransitions():
-            if transition.getSymbol() == 'ã':
+            if transition.getSymbol() == 'λ':
                 if transition.getDestinyNode() not in reachLambda:
                     reachLambda.append(transition.getDestinyNode())
                     self.__reachesWithLambda(
                         transition.getDestinyNode(), reachLambda)
 
     # Função auxiliar para remover todas as transições para um nó (usado quando se vai apagar um nó)
-    def __removeTransitionToState(self, automaton, target):
+    @staticmethod
+    def __removeTransitionToState(automaton, target):
         for state in automaton.getStates():
             willBeRemoved = []
             for transition in state.getTransitions():
@@ -165,7 +155,7 @@ class Converter(object):
     def removeLambda(self, automaton):
         # Set para armazenar os fechos lambdas
         lambdaClosure = {}
-        auxVetor = []
+        # auxVetor = []
 
         # Constroi fecho lambda para cada nó
         for state in automaton.getStates():
@@ -178,14 +168,14 @@ class Converter(object):
         for state in automaton.getStates():
             afn.addState(Node(state.getName()))
 
-        afn.addState(automaton.getAlphabet())
+        afn.setAlphabet(automaton.getAlphabet())
 
         # Cria todas as transições do AFN com base no AFN-Lambda e nos fechos lambdas
         for state in afn.getStates():
             auxState = automaton.getStateByName(state.getName())
-            for auxTransition in auxState.getTransicions():
-                if auxTransition.getSymbol() != 'δ':
-                    state.adicionar_trasicao(
+            for auxTransition in auxState.getTransitions():
+                if auxTransition.getSymbol() != 'λ':
+                    state.addTransition(
                         auxTransition.getSymbol(),
                         afn.getStateByName(auxTransition.getDestinyNode().getName())
                     )
@@ -207,7 +197,7 @@ class Converter(object):
         # remove estados inuteis
         willBeRemoved = []
         for state in afn.getStates():
-            if len(state.get_transicoes()) == 0 and state not in afn.getFinalStates():
+            if len(state.getTransitions()) == 0 and state not in afn.getFinalStates():
                 if state in afn.getInitialStates():
                     afn.removeInitalState(state)
                 self.__removeTransitionToState(afn, state)
