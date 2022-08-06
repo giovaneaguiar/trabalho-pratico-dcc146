@@ -70,7 +70,7 @@ class Tag:
             stack.clear()
             return False
 
-        print("\nExpressão Regular: " + stack[0])
+        print("Expressão Regular: " + stack[0])
 
         stack.clear()
         return True

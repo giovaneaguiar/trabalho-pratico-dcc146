@@ -58,7 +58,7 @@ if __name__ == "__main__":
                         newTag = line.split(': ', 1)
                         if Tag.validateTag(newTag):
                             addTag(newTag)
-                            automatons.addAutomaton(newTag[0], newTag[1])
+                            automatons.addAutomaton(newTag[0].upper(), newTag[1])
                         else:
                             MessageLogs.error("Formato da tag inválido!")
                 except:
@@ -93,6 +93,7 @@ if __name__ == "__main__":
                     newTag = userInput.split(': ', 1)
                     if Tag.validateTag(newTag):
                         addTag(newTag)
+                        automatons.addAutomaton(newTag[0].upper(), newTag[1])
                     else:
                         MessageLogs.error("Formato da tag inválido!")
                 else:
