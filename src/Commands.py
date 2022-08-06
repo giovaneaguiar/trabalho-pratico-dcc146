@@ -9,16 +9,14 @@ previousPath = os.path.abspath(os.path.dirname(__file__))
 
 
 class Commands:
-    __tagsInput = []  # Array com todas as tags da entrada especificada
+    __tagsInput = []  # Array com todas as tags da entrada especificada em sentido ocidental
+    __tagsInput2 = []  # Array com todas as tags da entrada especificada em sentido oriental
 
     def divideTagsFile(self, string: str, automatons):  #:d
         file = self.chargeFile(string)
         for line in file:
-            self.__tagsInput.clear()
-            if self.__divideTags(self, line, automatons):
-                print(" ".join(self.__tagsInput))
-            else:
-                MessageLogs.error("A entrada não pode ser completamente reconhecida!")
+            print(line)
+            self.divideTagsParam(self, line, automatons)
         return
 
     @staticmethod
@@ -44,8 +42,19 @@ class Commands:
 
     def divideTagsParam(self, string: str, automatons):  #:p
         self.__tagsInput.clear()
-        if self.__divideTags(self, string, automatons):
+        self.__tagsInput2.clear()
+        way1 = self.__divideTags(self, string, automatons, 1)
+        way2 = self.__divideTags(self, string, automatons, 0)
+        # Verifica qual caminho obteve o melhor resultado
+        if way1 and way2:
+            if self.__tagsInput.__len__() << self.__tagsInput2.__len__():
+                print(" ".join(self.__tagsInput))
+            else:
+                print(" ".join(self.__tagsInput2))
+        elif way1:
             print(" ".join(self.__tagsInput))
+        elif way2:
+            print(" ".join(self.__tagsInput2))
         else:
             MessageLogs.error("A entrada não pode ser completamente reconhecida!")
         return
@@ -85,34 +94,46 @@ class Commands:
     #
     # ------------------ Métodos auxiliares ------------------
 
-    def __divideTags(self, string: str, automatons):
+    # way = 1 percorre a entrada especificada em sentido ocidental
+    # se way != 1, percorre a entrada especificada em sentido oriental
+    def __divideTags(self, string: str, automatons, way: int):
         firstChar = 0
         lastChar = len(string)
         foundAutomaton = False
-        recognized = ""
+        recognized = ""  # String que guarda o automato encontrado, para verificar a ambiguidade dos automatos
         while lastChar >= firstChar:
             # Testa se a entrada é reconhecida por algum automato
             for automaton in automatons:
                 if automaton.analyzeString(string[firstChar:lastChar]):
                     if not foundAutomaton:
                         recognized = automaton.getTagName()
-                        self.__tagsInput.append(recognized)
-                        # firstChar = lastChar
-                        # lastChar = len(string)
+                        if way == 1:
+                            self.__tagsInput.append(recognized)
+                        else:
+                            self.__tagsInput2.insert(0, recognized)
                         foundAutomaton = True
                     else:
-                        MessageLogs.warning(f"Sobreposição na definição das Tags: {recognized} e { automaton.getTagName() }")
+                        MessageLogs.warning(f"Sobreposição na definição das Tags "
+                                            f"{ recognized } e { automaton.getTagName() }")
 
-            # Se nenhum automato reconhecer o texto, o caractere final eh retirado
+            # Se nenhum automato reconhecer o texto, o caractere final ou inicial eh retirado
             if not foundAutomaton:
-                lastChar = lastChar - 1
+                if way == 1:
+                    lastChar = lastChar - 1
+                else:
+                    firstChar = firstChar + 1
                 if lastChar == firstChar:
                     return False
+            # Se algum automato reconhecer o texto, começa de novo com o restante do texto
             else:
                 if lastChar == firstChar:
                     break
                 else:
                     foundAutomaton = False
-                    firstChar = lastChar
-                    lastChar = len(string)
+                    if way == 1:
+                        firstChar = lastChar
+                        lastChar = len(string)
+                    else:
+                        lastChar = firstChar
+                        firstChar = 0
         return True
