@@ -286,13 +286,3 @@ class Converter(object):
         # Deleta o AFN e retorna o AFD
         del automaton
         return afd
-
-    # Imprime definição formal de todos os automatos registrados na memória
-    # def listardefinicoes(self):
-    #     count = 0
-    #     if (len(self.__automatons) > 0):
-    #         for automato in self.__automatons:
-    #             automato.formalDefinition(count)
-    #             count = count + 1
-    #     else:
-    #         MessageLogs.warning("Nao há algum autômato registrado na memória!")
