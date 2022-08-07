@@ -73,11 +73,11 @@ class Commands:
 
     @staticmethod
     def listValidTags(tags):  #:l
-        if len(tags) >= 1:
+        if len(tags):
             for tag in tags:
                 print(tag + ": " + tags[tag])
         else:
-            MessageLogs.info("Nenhuma Tag foi validada ainda")
+            MessageLogs.warning("Nenhuma Tag foi validada ainda!")
         return
 
     @staticmethod
@@ -86,9 +86,17 @@ class Commands:
         exit()
 
     @staticmethod
-    def saveTags():  #:s
-        MessageLogs.warning("Esta funcionalidade ainda não foi implementada!")
-        return
+    def saveTagsInFile(tags, fileInputName):  #:s
+        filesPath = os.path.join(previousPath, '..', 'files', fileInputName)
+        file = open(filesPath, "w", encoding="UTF-8")
+        MessageLogs.info(filesPath)
+        if len(tags):
+            for tag in tags:
+                file.write(tag + ": " + tags[tag] + '\n')
+            file.close()
+            return
+        else:
+            MessageLogs.warning("Nenhuma Tag foi validada ainda!")
 
     # ------------------- Fim dos comandos -------------------
     #

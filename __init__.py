@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
             case ':S':
                 try:
-                    Commands.saveTags()
+                    Commands.saveTagsInFile(tags, contentInput)
                 except:
                     pass
 
