@@ -62,5 +62,3 @@ estado).
 • :q - sair do programa.
 
 • :s - salvar as tags.
-
-• :h - lista os comandos aceitos.
