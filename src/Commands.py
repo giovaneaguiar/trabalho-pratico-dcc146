@@ -21,7 +21,7 @@ class Commands:
 
     @staticmethod
     def chargeFile(nameFile: str):  #:c
-        filesPath = os.path.join(previousPath, '..', 'files', nameFile)
+        filesPath = os.path.join(previousPath, '..', 'files/input', nameFile)
         try:
             file = open(filesPath, 'r', encoding='utf-8').readlines()
             MessageLogs.info("Arquivo aberto com exito!\n")
@@ -35,7 +35,7 @@ class Commands:
 
     @staticmethod
     def outputFilePath(nameFile: str):  #:o
-        filesPath = os.path.join(previousPath, '..', 'files', nameFile)
+        filesPath = os.path.join(previousPath, '..', 'files/output', nameFile)
         file = open(filesPath, "w", encoding="UTF-8")
         MessageLogs.info(filesPath)
         return file
@@ -87,13 +87,13 @@ class Commands:
 
     @staticmethod
     def saveTagsInFile(tags, fileInputName):  #:s
-        filesPath = os.path.join(previousPath, '..', 'files', fileInputName)
+        filesPath = os.path.join(previousPath, '..', 'files/output', fileInputName)
         file = open(filesPath, "w", encoding="UTF-8")
-        MessageLogs.info(filesPath)
         if len(tags):
             for tag in tags:
                 file.write(tag + ": " + tags[tag] + '\n')
             file.close()
+            MessageLogs.success("Tags salvas no arquivo " + fileInputName + " com sucesso!")
             return
         else:
             MessageLogs.warning("Nenhuma Tag foi validada ainda!")
