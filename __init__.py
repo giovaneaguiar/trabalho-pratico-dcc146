@@ -48,8 +48,8 @@ if __name__ == "__main__":
                 # Se o arquivo não for encontrado, continua a aplicação
                 try:
                     Commands.divideTagsFile(Commands, contentInput, automatons.getAutomatons())
-                except:
-                    pass
+                except Exception as e:
+                    MessageLogs.error("Erro ao dividir as tags com arquivo de entrada! " + str(e))
 
             case ':C':
                 try:
@@ -61,23 +61,33 @@ if __name__ == "__main__":
                             automatons.addAutomaton(newTag[0].upper(), newTag[1])
                         else:
                             MessageLogs.error("Formato da tag inválido!")
-                except:
-                    pass
+                except Exception as e:
+                    MessageLogs.error("Erro ao carregar um arquivo com as definições de tag! " + str(e))
 
             case ':O':
                 try:
-                    Commands.outputFilePath(contentInput)
-                except:
-                    pass
+                    Commands.outputFilePath(Commands, contentInput)
+                except Exception as e:
+                    MessageLogs.error("Erro ao setar arquivo de saída para divisão de tags! " + str(e))
 
             case ':P':
-                Commands.divideTagsParam(Commands, contentInput, automatons.getAutomatons())
+                try:
+                    outputFile = open(Commands.outputFileForSplitTags, 'w', encoding='utf-8') if Commands.outputFileForSplitTags else None
+                    Commands.divideTagsParam(Commands, contentInput, automatons.getAutomatons(), outputFile)
+                except Exception as e:
+                    MessageLogs.error("Erro ao dividir as tags com a entrada via terminal! " + str(e))
 
             case ':A':
-                Commands.listAutoInMemory(automatons.getAutomatons())
+                try:
+                    Commands.listAutoInMemory(automatons.getAutomatons())
+                except Exception as e:
+                    MessageLogs.error("Erro ao listar as definições formais dos autômatos em memória! " + str(e))
 
             case ':L':
-                Commands.listValidTags(tags)
+                try:
+                    Commands.listValidTags(tags)
+                except Exception as e:
+                    MessageLogs.error("Erro ao listar as tags válidas! " + str(e))
 
             case ':Q':
                 Commands.quit()
@@ -85,8 +95,8 @@ if __name__ == "__main__":
             case ':S':
                 try:
                     Commands.saveTagsInFile(tags, contentInput)
-                except:
-                    pass
+                except Exception as e:
+                    MessageLogs.error("Erro ao salvar as tags em um arquivo! " + str(e))
 
             case default:
                 if ': ' in userInput:
