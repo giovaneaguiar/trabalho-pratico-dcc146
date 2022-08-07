@@ -11,12 +11,16 @@ previousPath = os.path.abspath(os.path.dirname(__file__))
 class Commands:
     __tagsInput = []  # Array com todas as tags da entrada especificada em sentido ocidental
     __tagsInput2 = []  # Array com todas as tags da entrada especificada em sentido oriental
+    outputFileForSplitTags = None
 
     def divideTagsFile(self, string: str, automatons):  #:d
         file = self.chargeFile(string)
+        outputFile = open(self.outputFileForSplitTags, 'w', encoding='utf-8') if self.outputFileForSplitTags else None
+        outputIndex = 1
         for line in file:
-            print(line)
-            self.divideTagsParam(self, line, automatons)
+            print("Entrada " + str(outputIndex) + ": " + line)
+            self.divideTagsParam(self, line, automatons, outputFile)
+            outputIndex = outputIndex + 1
         return
 
     @staticmethod
@@ -34,13 +38,12 @@ class Commands:
             MessageLogs.error("Arquivo não encontrado!\n")
 
     @staticmethod
-    def outputFilePath(nameFile: str):  #:o
-        filesPath = os.path.join(previousPath, '..', 'files/output', nameFile)
-        file = open(filesPath, "w", encoding="UTF-8")
-        MessageLogs.info(filesPath)
-        return file
+    def outputFilePath(self, nameFile: str):  #:o
+        self.outputFileForSplitTags = os.path.join(previousPath, '..', 'files/output', nameFile)
+        MessageLogs.success("Caminho de saída para a divisão de tags especificado com sucesso!")
+        return
 
-    def divideTagsParam(self, string: str, automatons):  #:p
+    def divideTagsParam(self, string: str, automatons, outputFile):  #:p
         self.__tagsInput.clear()
         self.__tagsInput2.clear()
         way1 = self.__divideTags(self, string, automatons, 1)
@@ -48,13 +51,13 @@ class Commands:
         # Verifica qual caminho obteve o melhor resultado
         if way1 and way2:
             if self.__tagsInput.__len__() << self.__tagsInput2.__len__():
-                print(" ".join(self.__tagsInput))
+                outputFile.write(" ".join(self.__tagsInput) + "\n") if outputFile else print(" ".join(self.__tagsInput))
             else:
-                print(" ".join(self.__tagsInput2))
+                outputFile.write(" ".join(self.__tagsInput2) + "\n") if outputFile else print(" ".join(self.__tagsInput2))
         elif way1:
-            print(" ".join(self.__tagsInput))
+            outputFile.write(" ".join(self.__tagsInput) + "\n") if outputFile else print(" ".join(self.__tagsInput))
         elif way2:
-            print(" ".join(self.__tagsInput2))
+            outputFile.write(" ".join(self.__tagsInput2) + "\n") if outputFile else print(" ".join(self.__tagsInput2))
         else:
             MessageLogs.error("A entrada não pode ser completamente reconhecida!")
         return
