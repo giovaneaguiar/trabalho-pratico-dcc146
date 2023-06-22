@@ -1,15 +1,16 @@
 # Trabalho Prático - Aspectos Teóricos da Computação (DCC146)
 
-#### Alunos: 
+#### Alunos:
+~~~python
 - Augusto Castilho  - 201876044
-- Giovane Machado   - 201876019
+- Giovane Aguiar   - 201876019
 - Matheus Rubio     - 201876036
+~~~
+## Executando a Aplicação
 
-## Executando a aplicação
-
-A aplicação é desenvolvida na linguagem Python, e para realizar a sua execução é necessário possuir a versão 3.10 ou superior do Python pois versões em versões abaixo desta a aplicação pode não funcionar corretamente.
+A aplicação é desenvolvida na linguagem Python, e para realizar a sua execução é necessário possuir a versão 3.10 ou superior do Python pois versões em versões abaixo desta a aplicação podem não funcionar corretamente.
 > Caso tenha dificuldades em instalar ou alterar a versão do seu Python em ambiente Linux, onde é ligeiramente mais complexo, sugerimos dois tutoriais que podem te ajudar:
->   - [Instalar gerenciador de versões do python (PYENV)](https://gist.github.com/luzfcb/ef29561ff81e81e348ab7d6824e14404)
+>   - [Instalar Gerenciador de Versões do Python (PYENV)](https://gist.github.com/luzfcb/ef29561ff81e81e348ab7d6824e14404)
 >   - [Instalar o Python na versão 3.10](https://computingforgeeks.com/how-to-install-python-on-ubuntu-linux-system/)
 
 Tendo seu ambiente configurado, basta ir na pasta raiz do projeto digitar o seguinte comando no seu terminal:
@@ -22,7 +23,7 @@ Tendo seu ambiente configurado, basta ir na pasta raiz do projeto digitar o segu
  <b>python __init__.py</b><br>
 </p>
 
-## Estruturas de dados
+## Estruturas de Dados
 
 ● init.py: arquivo principal utilizado para execução, responsável pela
 entrada dos comandos.
